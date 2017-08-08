@@ -97,7 +97,7 @@ class paths {
         if (_rootDir.has(this)) {
             return _rootDir.get(this);
         }
-        return _rootDir;
+        return rootDir;
     }
 
     set rootDir(value) { _rootDir.set(this, value); }
