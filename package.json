@@ -1,12 +1,11 @@
 {
-  "name": "ui",
+  "name": "dolittle.javascript.build",
   "version": "1.0.0",
-  "dependencies": {},
   "scripts": {
     "test": "jspmjasmine --jasmine-config ./jasmine.json",
     "testwatch": "jspmjasmine --jasmine-config ./jasmine.json -w"
   },
-  "devDependencies": {
+  "dependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.6.5",
     "babel-plugin-transform-decorators": "^6.6.0",
