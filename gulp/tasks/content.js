@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import gulp from "gulp";
 import gulpDebug from "gulp-debug";
+import rename from "../rename";
 import util from "gulp-util";
 import config from "../config";
 
@@ -11,13 +12,14 @@ export function contentPipeline(stream) {
     console.log(`Output content to : ${config.paths.outputDir}`);
     stream
         .on("error", util.log)
+        .pipe(rename())
         .pipe(gulpDebug())
         .pipe(gulp.dest(config.paths.outputDir));
     return stream;
 }
 
 gulp.task("content", () => {
-    var stream = gulp.src(config.paths.content.all,{base:config.paths.sourceDir});
+    var stream = gulp.src(config.paths.content.all, { base: config.paths.sourceDir });
     contentPipeline(stream);
     return stream;
 });
