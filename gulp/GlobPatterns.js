@@ -2,7 +2,7 @@
  *  Copyright (c) 2008-2017 doLittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import GlobPattern from "./GlobPattern";
+import { GlobPattern } from "./GlobPattern";
 const _patterns = new WeakMap();
 const _negated = new WeakMap();
 

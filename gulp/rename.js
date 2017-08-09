@@ -10,27 +10,35 @@ let rename = (globConfig) => {
     let stream = new Stream.Transform({ objectMode: true });
 
     stream._transform = (originalFile, unused, callback) => {
-        console.log("Transform : "+originalFile.path);
+        //console.log("Transform : "+originalFile.path);
         let resolvedDirName = path.dirname(originalFile.path);
 
         let file = originalFile.clone({ contents: false });
 
-        let sortedIncludes = globConfig.includes.all.sort((a,b) => b.length - a.length);
+        let sortedIncludes = globConfig.includes.all.sort((a,b) => b.combined.length - a.combined.length);
+
         sortedIncludes.every(p => {
-            let wildcardIndex = p.indexOf('*');
-            if (wildcardIndex >= 0) p = p.substr(0, wildcardIndex);
+            let pattern = p.combined;
+            let wildcardIndex = pattern.indexOf('*');
+            if (wildcardIndex >= 0) pattern = pattern.substr(0, wildcardIndex);
 
-            if (p[p.length - 1] == path.sep) p = p.substr(0, p.length - 1);
+            if (pattern[pattern.length - 1] == path.sep) pattern = pattern.substr(0, pattern.length - 1);
 
-            let resolved = path.resolve(p);
+            let resolved = path.resolve(pattern);
             if (resolvedDirName.indexOf(resolved) == 0) {
-                let start = resolved.length;
+                let pathToUse = resolved;
+                if( p.hasBasePath ) {
+                    pathToUse = p.basePath;
+                }
+
+                let start = pathToUse.length;
                 if( file.path.indexOf(path.sep) == 0 ) start++;
                 let relativeFile =  originalFile.path.substr(start);
                 let output = path.join(config.paths.outputDir,relativeFile); 
                 file.path = output;
                  
-                console.log("Renaming to : "+output);
+                //console.log("Renaming to : "+output);
+                //console.log("Using pattern : "+pattern);
                 return 0;
             }
             return 1;

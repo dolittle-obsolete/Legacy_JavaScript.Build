@@ -2,6 +2,7 @@
  *  Copyright (c) 2008-2017 doLittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import path from "path";
 const _pattern = new WeakMap();
 const _basePath = new WeakMap();
 
@@ -37,4 +38,13 @@ export class GlobPattern {
      * @returns {Boolean} true if it has, false if not
      */
     get hasBasePath() { return this.basePath.length > 0; }
+
+    /**
+     * Get a combined version of the pattern with the base path + pattern
+     * @returns {String}
+     */
+    get combined() { 
+        if( this.hasBasePath ) return path.join(this.basePath, this.pattern);
+        else return this.pattern;
+    }
 }

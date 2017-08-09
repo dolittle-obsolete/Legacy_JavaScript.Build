@@ -54,14 +54,14 @@ export class GlobConfig {
     }
 
     /**
-     * Get all the patterns as string - without the base path
+     * Get all the patterns combined with the base path - if any
      * @returns {String[]}
      */
-    get allPatternsAsString() {
+    get allCombined() {
         let patterns = [];
-        let addPattern = (pattern) => patterns.push(pattern.pattern);
-        this.includes.forEach(addPattern);
-        this.excludes.forEach(addPattern);
+        let addPattern = (pattern) => patterns.push(pattern.combined);
+        this.includes.all.forEach(addPattern);
+        this.excludes.all.forEach(addPattern);
         return patterns;
     }
 }
