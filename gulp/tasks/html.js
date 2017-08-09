@@ -6,11 +6,14 @@ import gulp from "gulp";
 import gulpDebug from "gulp-debug";
 import util from "gulp-util";
 import config from "../config";
+import rename from "../rename";
+
 
 export function htmlPipeline(stream) {
     console.log(`Output html to : ${config.paths.outputDir}`);
     stream
         .on("error", util.log)
+        .pipe(rename(config.paths.html))        
         .pipe(gulpDebug())
         .pipe(gulp.dest(config.paths.outputDir));
     return stream;
