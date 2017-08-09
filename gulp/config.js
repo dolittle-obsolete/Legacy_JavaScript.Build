@@ -102,8 +102,8 @@ class paths {
             content.includes.add(`${this.rootDir}/**/*.png`)
             content.includes.add(`${this.rootDir}/scripts/*.js`);
             content.includes.add(`${this.rootDir}/fonts/**/*`);
-            content.eccludes.add(`!${this.rootDir}/node_modules/**/*`);
-            content.eccludes.add(`!${this.outputDir}/**/*`);
+            content.excludes.add(`!${this.rootDir}/node_modules/**/*`);
+            content.excludes.add(`!${this.outputDir}/**/*`);
         }
         return content;
     }
