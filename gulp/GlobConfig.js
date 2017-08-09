@@ -32,7 +32,7 @@ export class GlobConfig {
      * Get the {GlobPatterns} for paths to exclude
      * @returns {GlobPatterns}
      */    
-    get exludes() {
+    get excludes() {
         return _excludes.set(this);
     }
 
