@@ -82,10 +82,10 @@ class paths {
         let less = _less.get(this);
         if( less.isEmpty ) {
             less.includes.add(`${this.rootDir}/styles/styles.less`);
-            less.ecxludes.add(`${this.rootDir}/bower_components/**/*`);
-            less.ecxludes.add(`${this.rootDir}/jspm_packages/**/*`);
-            less.ecxludes.add(`${this.rootDir}/node_modules/**/*`);
-            less.ecxludes.add(`${this.outputDir}/**/*`);
+            less.excludes.add(`${this.rootDir}/bower_components/**/*`);
+            less.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+            less.excludes.add(`${this.rootDir}/node_modules/**/*`);
+            less.excludes.add(`${this.outputDir}/**/*`);
         }
         return less;
     }
