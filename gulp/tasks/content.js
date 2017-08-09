@@ -5,13 +5,13 @@
 import gulp from "gulp";
 import config from "../config";
 
-export function staticContentPipeline(stream) {
+export function contentPipeline(stream) {
     stream.pipe(gulp.dest(config.paths.outputDir));
     return stream;
 }
 
-gulp.task("staticContent", () => {
-    var stream = gulp.src(config.paths.content,{base:config.paths.sourceDir});
-    staticContentPipeline(stream);
+gulp.task("content", () => {
+    var stream = gulp.src(config.paths.content.all,{base:config.paths.sourceDir});
+    contentPipeline(stream);
     return stream;
 });

@@ -12,7 +12,7 @@ import multimatch from "multimatch";
 import { javaScriptPipeline } from "./javascript";
 import { htmlPipeline } from "./html";
 import { lessPipeline } from "./less";
-import { staticContentPipeline } from "./staticContent";
+import { contentPipeline } from "./content";
 import { javaScriptSpecsPipeline } from "./javascriptSpecs.js";
 
 let fileHandlers = [];
@@ -68,7 +68,7 @@ export function addFileHandler(paths, pipeline) {
 let addFileHandlers = () => {
     addFileHandler(config.paths.html, htmlPipeline);
     addFileHandler(config.paths.less, lessPipeline);
-    addFileHandler(config.paths.content, staticContentPipeline);
+    addFileHandler(config.paths.content, contentPipeline);
     addFileHandler(config.paths.javascript, javaScriptPipeline);
     addFileHandler(config.paths.javascriptSpecs, javaScriptSpecsPipeline);
 };

@@ -8,12 +8,12 @@ import runSequence from "run-sequence";
 import "./html";
 import "./javascript";
 import "./less";
-import "./staticContent";
+import "./content";
 import "./dotnet";
 import "./watch";
 import "./javascriptSpecs";
 
-gulp.task("build", ["html", "javascript", "less", "staticContent", "dotnetbuild"]);
+gulp.task("build", ["html", "javascript", "less", "content", "dotnetbuild"]);
 
 gulp.task("printConfig", () => {
     console.log("**** Configuration ****")
@@ -28,7 +28,7 @@ gulp.task("default", () => {
 });
 
 gulp.task("webonly", () => {
-    runSequence("printConfig", ["html", "javascript", "less", "staticContent"], "watch");
+    runSequence("printConfig", ["html", "javascript", "less", "content"], "watch");
 });
 
 

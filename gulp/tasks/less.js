@@ -17,7 +17,7 @@ export function lessPipeline(stream) {
 }
 
 gulp.task("less", () => {
-    var stream = gulp.src(config.paths.less,{base:config.paths.sourceDir});
+    var stream = gulp.src(config.paths.less.all,{base:config.paths.sourceDir});
     lessPipeline(stream);
     return stream;
 });

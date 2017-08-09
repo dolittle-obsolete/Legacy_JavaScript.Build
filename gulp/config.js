@@ -2,6 +2,8 @@
  *  Copyright (c) 2008-2017 doLittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import {GlobConfig} from "./GlobConfig";
+
 let rootDir = process.cwd();
 let outputDir = `${rootDir}/wwwroot`;
 let sourceDir = `${rootDir}`;
@@ -13,6 +15,11 @@ const _sourceDir = new WeakMap();
 const _specsDir = new WeakMap();
 const _dotnetProcessString = new WeakMap();
 
+const _less = new WeakMap();
+const _html = new WeakMap();
+const _content = new WeakMap();
+
+
 class config {
     constructor() {
         this.paths = new paths(this);
@@ -22,6 +29,10 @@ class config {
 class paths {
     constructor(config) {
         this.config = config;
+
+        _less.set(this, new GlobConfig());
+        _html.set(this, new GlobConfig());
+        _content.set(this, new GlobConfig());
     }
 
     get csharp() {
@@ -30,18 +41,6 @@ class paths {
             `!${this.sourceDir}/**/bin/**/*`,
             `!${this.sourceDir}/**/obj/**/*`
         ];
-    }
-    
-
-    get html() {
-        return [
-            `${this.rootDir}/**/*.html`,
-            `!${this.rootDir}/bin/**/*`,
-            `!${this.rootDir}/bower_components/**/*`,
-            `!${this.rootDir}/jspm_packages/**/*`,
-            `!${this.rootDir}/node_modules/**/*`,
-            `!${this.outputDir}/**/*`
-        ]
     }
 
     get javascript() {
@@ -66,31 +65,47 @@ class paths {
         ];
     }
 
+    get html() {
+        let html = _html.get(this);
+        if( html.isEmpty ) {
+            html.includes.add(`${this.rootDir}/**/*.html`);
+            html.excludes.add(`${this.rootDir}/bin/**/*`);
+            html.excludes.add(`${this.rootDir}/bower_components/**/*`);
+            html.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+            html.excludes.add(`${this.rootDir}/node_modules/**/*`);
+            html.excludes.add(`${this.outputDir}/**/*`);
+        }
+        return html;
+    }
 
     get less() {
-        return [
-            `${this.rootDir}/styles/styles.less`,
-            `!${this.rootDir}/bower_components/**/*`,
-            `!${this.rootDir}/jspm_packages/**/*`,
-            `!${this.rootDir}/node_modules/**/*`,
-            `!${this.outputDir}/**/*`
-        ];
+        let less = _less.get(this);
+        if( less.isEmpty ) {
+            less.includes.add(`${this.rootDir}/styles/styles.less`);
+            less.ecxludes.add(`${this.rootDir}/bower_components/**/*`);
+            less.ecxludes.add(`${this.rootDir}/jspm_packages/**/*`);
+            less.ecxludes.add(`${this.rootDir}/node_modules/**/*`);
+            less.ecxludes.add(`${this.outputDir}/**/*`);
+        }
+        return less;
     }
 
     get content() {
-        return [
-            `${this.rootDir}/jspm_packages/**/*`,
-            `${this.rootDir}/bower_components/bootstrap/dist/js/bootstrap.min.js`,
-            `${this.sourceDir}/jspm.config.js`,
-            `${this.rootDir}/**/*.jpg`,
-            `${this.rootDir}/**/*.jpeg`,
-            `${this.rootDir}/**/*.gif`,
-            `${this.rootDir}/**/*.png`,
-            `${this.rootDir}/scripts/*.js`,
-            `${this.rootDir}/fonts/**/*`,
-            `!${this.rootDir}/node_modules/**/*`,
-            `!${this.outputDir}/**/*`
-        ]
+        let content = _content.get(this);
+        if( content.isEmpty ) {
+            content.includes.add(`${this.rootDir}/jspm_packages/**/*`);
+            content.includes.add(`${this.rootDir}/bower_components/bootstrap/dist/js/bootstrap.min.js`);
+            content.includes.add(`${this.sourceDir}/jspm.config.js`);
+            content.includes.add(`${this.rootDir}/**/*.jpg`);
+            content.includes.add(`${this.rootDir}/**/*.jpeg`);
+            content.includes.add(`${this.rootDir}/**/*.gif`);
+            content.includes.add(`${this.rootDir}/**/*.png`)
+            content.includes.add(`${this.rootDir}/scripts/*.js`);
+            content.includes.add(`${this.rootDir}/fonts/**/*`);
+            content.eccludes.add(`!${this.rootDir}/node_modules/**/*`);
+            content.eccludes.add(`!${this.outputDir}/**/*`);
+        }
+        return content;
     }
 
     get rootDir() {
