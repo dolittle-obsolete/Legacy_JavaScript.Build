@@ -49,6 +49,6 @@ export class GlobPatterns {
      * @returns {Boolean} - true if empty, false if not
      */
     get isEmpty() {
-        return [].length == 0;
+        return _patterns.get(this).length == 0;
     }
 }
