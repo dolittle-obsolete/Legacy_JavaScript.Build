@@ -3,10 +3,15 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import gulp from "gulp";
+import gulpDebug from "gulp-debug";
+import util from "gulp-util";
 import config from "../config";
 
 export function htmlPipeline(stream) {
-    stream.pipe(gulp.dest(config.paths.outputDir));
+    stream
+        .on("error", util.log)
+        .pipe(gulpDebug())
+        .pipe(gulp.dest(config.paths.outputDir));
     return stream;
 }
 
