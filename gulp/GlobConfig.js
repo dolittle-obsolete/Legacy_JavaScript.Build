@@ -33,7 +33,7 @@ export class GlobConfig {
      * @returns {GlobPatterns}
      */    
     get excludes() {
-        return _excludes.set(this);
+        return _excludes.get(this);
     }
 
     /**
