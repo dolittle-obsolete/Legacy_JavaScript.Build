@@ -49,6 +49,6 @@ export class GlobConfig {
      * @returns {String[]}
      */    
     get all() {
-        return _includes.all.concat(_excludes.all);
+        return _includes.get(this).all.concat(_excludes.get(this).all);
     }
 }
