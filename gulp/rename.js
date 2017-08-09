@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import Stream from "stream";
 import path from "path";
+import config from "./config";
 
 let rename = (globConfig) => {
     let stream = new Stream.Transform({ objectMode: true });
