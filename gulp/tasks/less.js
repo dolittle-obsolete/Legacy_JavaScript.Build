@@ -9,6 +9,7 @@ import util from "gulp-util";
 import less from "gulp-less";
 
 export function lessPipeline(stream) {
+    console.log(`Output less to : ${config.paths.outputDir}`);
     stream
         .pipe(less())
         .on("error", util.log)

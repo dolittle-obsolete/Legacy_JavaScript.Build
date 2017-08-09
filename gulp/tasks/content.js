@@ -8,6 +8,7 @@ import util from "gulp-util";
 import config from "../config";
 
 export function contentPipeline(stream) {
+    console.log(`Output content to : ${config.paths.outputDir}`);
     stream
         .on("error", util.log)
         .pipe(gulpDebug())
