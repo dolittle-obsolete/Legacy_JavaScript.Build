@@ -5,7 +5,7 @@
 import Stream from "stream";
 import path from "path";
 
-let rename = () => {
+let rename = (globConfig) => {
     let stream = new Stream.Transform({ objectMode: true });
 
     stream._transform = (originalFile, unused, callback) => {
@@ -14,7 +14,7 @@ let rename = () => {
 
         let file = originalFile.clone({ contents: false });
 
-        let sortedIncludes = config.paths.content.includes.all.sort((a,b) => b.length - a.length);
+        let sortedIncludes = globConfig.includes.all.sort((a,b) => b.length - a.length);
         sortedIncludes.every(p => {
             let wildcardIndex = p.indexOf('*');
             if (wildcardIndex >= 0) p = p.substr(0, wildcardIndex);

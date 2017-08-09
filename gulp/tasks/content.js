@@ -12,7 +12,7 @@ export function contentPipeline(stream) {
     console.log(`Output content to : ${config.paths.outputDir}`);
     stream
         .on("error", util.log)
-        .pipe(rename())
+        .pipe(rename(config.paths.content))
         .pipe(gulpDebug())
         .pipe(gulp.dest(config.paths.outputDir));
     return stream;
