@@ -66,9 +66,9 @@ export function addFileHandler(paths, pipeline) {
 }
 
 let addFileHandlers = () => {
-    addFileHandler(config.paths.html, htmlPipeline);
-    addFileHandler(config.paths.less, lessPipeline);
-    addFileHandler(config.paths.content, contentPipeline);
+    addFileHandler(config.paths.html.all, htmlPipeline);
+    addFileHandler(config.paths.less.all, lessPipeline);
+    addFileHandler(config.paths.content.all, contentPipeline);
     addFileHandler(config.paths.javascript, javaScriptPipeline);
     addFileHandler(config.paths.javascriptSpecs, javaScriptSpecsPipeline);
 };
