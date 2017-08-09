@@ -2,6 +2,7 @@
  *  Copyright (c) 2008-2017 doLittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import GlobPattern from "./GlobPattern";
 const _patterns = new WeakMap();
 const _negated = new WeakMap();
 
@@ -18,15 +19,15 @@ export class GlobPatterns {
 
     /**
      * Add a pattern
-     * @param {string} pattern The pattern to add
+     * @param {String} pattern The pattern to add
+     * @param {String} [basePath] The base path for the pattern to add - optional
      */
-    add(pattern) {
+    add(pattern, basePath) {
         let negated = _negated.get(this);
         let patterns = _patterns.get(this);
 
-        let handleString = (p) => (negated ? "!":"")+p;
-        if( pattern instanceof Array ) pattern.forEach(p => patterns.push(handleString(p)));
-        else patterns.push(handleString(pattern));
+        let handleString = (p) => (negated ? "!" : "") + p;
+        patterns.push(new GlobPattern(handleString(pattern), basePath));
     }
 
     /**

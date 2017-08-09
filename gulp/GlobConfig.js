@@ -2,6 +2,7 @@
  *  Copyright (c) 2008-2017 doLittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { GlobPattern } from "./GlobPattern";
 import { GlobPatterns } from "./GlobPatterns";
 const _includes = new WeakMap();
 const _excludes = new WeakMap();
@@ -22,7 +23,7 @@ export class GlobConfig {
     /**
      * Get the {GlobPatterns} for paths to include
      * @returns {GlobPatterns}
-     */    
+     */
     get includes() {
         return _includes.get(this);
 
@@ -31,7 +32,7 @@ export class GlobConfig {
     /**
      * Get the {GlobPatterns} for paths to exclude
      * @returns {GlobPatterns}
-     */    
+     */
     get excludes() {
         return _excludes.get(this);
     }
@@ -46,9 +47,21 @@ export class GlobConfig {
 
     /**
      * Get all the {GlobPatterns} for paths to include and exclude - in that order
-     * @returns {String[]}
-     */    
+     * @returns {GlobPattern[]}
+     */
     get all() {
-        return _includes.get(this).all.concat(_excludes.get(this).all);
+        return this.includes.all.concat(this.excludes.all);
+    }
+
+    /**
+     * Get all the patterns as string - without the base path
+     * @returns {String[]}
+     */
+    get allPatternsAsString() {
+        let patterns = [];
+        let addPattern = (pattern) => patterns.push(pattern.pattern);
+        this.includes.forEach(addPattern);
+        this.excludes.forEach(addPattern);
+        return patterns;
     }
 }

@@ -19,7 +19,7 @@ export function contentPipeline(stream) {
 }
 
 gulp.task("content", () => {
-    var stream = gulp.src(config.paths.content.all, { base: config.paths.sourceDir });
+    var stream = gulp.src(config.paths.content.allPatternsAsString, { base: config.paths.sourceDir });
     contentPipeline(stream);
     return stream;
 });

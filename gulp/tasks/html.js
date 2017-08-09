@@ -20,7 +20,7 @@ export function htmlPipeline(stream) {
 }
 
 gulp.task("html", () => {
-    var stream = gulp.src(config.paths.html.all,{base:config.paths.sourceDir});
+    var stream = gulp.src(config.paths.html.allPatternsAsString,{base:config.paths.sourceDir});
     htmlPipeline(stream);
     return stream;
 });
