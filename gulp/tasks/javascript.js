@@ -33,7 +33,6 @@ export function javaScriptPipeline(stream) {
 }
 
 gulp.task("javascript", () => {
-    console.log("SourceDir : " + config.paths.javascript.allCombined);
     var stream = gulp.src(config.paths.javascript.allCombined, { base: config.paths.sourceDir })
     javaScriptPipeline(stream);
     return stream;
