@@ -25,9 +25,7 @@ export class GlobPatterns {
     add(pattern, basePath) {
         let negated = _negated.get(this);
         let patterns = _patterns.get(this);
-
-        let handleString = (p) => (negated ? "!" : "") + p;
-        patterns.push(new GlobPattern(handleString(pattern), basePath));
+        patterns.push(new GlobPattern(pattern, negated, basePath));
     }
 
     /**
