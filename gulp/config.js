@@ -18,6 +18,7 @@ const _dotnetProcessString = new WeakMap();
 const _less = new WeakMap();
 const _html = new WeakMap();
 const _content = new WeakMap();
+const _javascript = new WeakMap();
 
 
 class config {
@@ -33,6 +34,7 @@ class paths {
         _less.set(this, new GlobConfig());
         _html.set(this, new GlobConfig());
         _content.set(this, new GlobConfig());
+        _javascript.set(this, new GlobConfig());
     }
 
     get csharp() {
@@ -44,19 +46,22 @@ class paths {
     }
 
     get javascript() {
-        return [
-            `${this.sourceDir}/**/*.js`,
-            `!${this.rootDir}/bower_components/**/*`,
-            `!${this.rootDir}/bin/**/*`,
-            `!${this.rootDir}/jspm_packages/**/*`,
-            `!${this.rootDir}/node_modules/**/*`,
-            `!${this.outputDir}/**/*`,
-            `!${this.rootDir}/jspm.config.js`,
-            `!${this.rootDir}/wallaby.js`,
-            `!${this.rootDir}/config.js`,
-            `!${this.rootDir}/gulpfile.js`,
-            `!${this.rootDir}/gulp/**/*`
-        ]
+        let javascript = _javascript.get(this);
+        if( javascript.isEmpty ) {
+            
+            javascript.includes.add(`${this.sourceDir}/**/*.js`);
+            javascript.excludes.add(`${this.rootDir}/bower_components/**/*`);
+            javascript.excludes.add(`${this.rootDir}/bin/**/*`);
+            javascript.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+            javascript.excludes.add(`${this.rootDir}/node_modules/**/*`);
+            javascript.excludes.add(`${this.outputDir}/**/*`);
+            javascript.excludes.add(`${this.rootDir}/jspm.config.js`);
+            javascript.excludes.add(`${this.rootDir}/wallaby.js`);
+            javascript.excludes.add(`${this.rootDir}/config.js`);
+            javascript.excludes.add(`${this.rootDir}/gulpfile.js`);
+            javascript.excludes.add(`${this.rootDir}/gulp/**/*`);
+        }
+        return javascript;
     }
 
     get javascriptSpecs() {

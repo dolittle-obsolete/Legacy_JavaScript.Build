@@ -3,12 +3,13 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import gulp from "gulp";
+import gulpDebug from "gulp-debug";
 import sourcemaps from "gulp-sourcemaps";
 import config from "../config";
 import babel from "./babel";
+import rename from "../rename";
 
-export function javaScriptPipeline(stream)
-{
+export function javaScriptPipeline(stream) {
     stream
         .pipe(sourcemaps.init())
         .pipe(babel())
@@ -24,14 +25,16 @@ export function javaScriptPipeline(stream)
             }
             //sourceRoot: "../"
         }))
+        .pipe(rename(config.paths.html))
+        .pipe(gulpDebug())
         .pipe(gulp.dest(config.paths.outputDir));
-    
+
     return stream;
 }
 
-gulp.task("javascript", () => 
-{
-    var stream = gulp.src(config.paths.javascript,{base:config.paths.sourceDir})
+gulp.task("javascript", () => {
+    console.log("SourceDir : " + config.paths.javascript.allCombined);
+    var stream = gulp.src(config.paths.javascript.allCombined, { base: config.paths.sourceDir })
     javaScriptPipeline(stream);
     return stream;
 });
