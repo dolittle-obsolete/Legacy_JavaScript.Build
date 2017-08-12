@@ -27,7 +27,7 @@ function handleFile(file, globs, pipeline, cb) {
     );
 
     try {
-        var stream = gulp.src(file, { base: config.paths.sourceDir });
+        var stream = gulp.src(file, { base: config.paths.outputDir });
         pipeline(stream, cb);
     } catch (ex) {
         util.log(ex);
