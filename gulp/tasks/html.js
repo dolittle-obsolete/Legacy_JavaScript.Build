@@ -20,7 +20,8 @@ export function htmlPipeline(stream) {
 }
 
 gulp.task("html", () => {
-    var stream = gulp.src(config.paths.html.allCombined,{base:config.paths.sourceDir});
+    console.log("Base : "+config.paths.sourceDir);
+    var stream = gulp.src(config.paths.html.allCombined,{base:config.paths.outputDir});
     htmlPipeline(stream);
     return stream;
 });
