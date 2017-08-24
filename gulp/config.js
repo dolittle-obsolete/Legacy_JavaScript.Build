@@ -35,6 +35,51 @@ class paths {
         _html.set(this, new GlobConfig());
         _content.set(this, new GlobConfig());
         _javascript.set(this, new GlobConfig());
+
+        this.addDefaults();
+    }
+
+    addDefaults() {
+        let javascript = _javascript.get(this);
+        javascript.includes.add(`${this.sourceDir}/**/*.js`);
+        javascript.excludes.add(`${this.rootDir}/bower_components/**/*`);
+        javascript.excludes.add(`${this.rootDir}/bin/**/*`);
+        javascript.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+        javascript.excludes.add(`${this.rootDir}/node_modules/**/*`);
+        javascript.excludes.add(`${this.outputDir}/**/*`);
+        javascript.excludes.add(`${this.rootDir}/jspm.config.js`);
+        javascript.excludes.add(`${this.rootDir}/wallaby.js`);
+        javascript.excludes.add(`${this.rootDir}/config.js`);
+        javascript.excludes.add(`${this.rootDir}/gulpfile.js`);
+        javascript.excludes.add(`${this.rootDir}/gulp/**/*`);
+
+        let html = _html.get(this);
+        html.includes.add(`${this.rootDir}/**/*.html`);
+        html.excludes.add(`${this.rootDir}/bin/**/*`);
+        html.excludes.add(`${this.rootDir}/bower_components/**/*`);
+        html.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+        html.excludes.add(`${this.rootDir}/node_modules/**/*`);
+        html.excludes.add(`${this.outputDir}/**/*`);
+
+        let less = _less.get(this);
+        less.includes.add(`${this.rootDir}/styles/styles.less`);
+        less.excludes.add(`${this.rootDir}/bower_components/**/*`);
+        less.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
+        less.excludes.add(`${this.rootDir}/node_modules/**/*`);
+        less.excludes.add(`${this.outputDir}/**/*`);
+
+        let content = _content.get(this);
+        content.includes.add(`${this.rootDir}/jspm_packages/**/*`);
+        content.includes.add(`${this.rootDir}/bower_components/bootstrap/dist/js/bootstrap.min.js`);
+        content.includes.add(`${this.sourceDir}/jspm.config.js`);
+        content.includes.add(`${this.rootDir}/**/*.jpg`);
+        content.includes.add(`${this.rootDir}/**/*.jpeg`);
+        content.includes.add(`${this.rootDir}/**/*.gif`);
+        content.includes.add(`${this.rootDir}/**/*.png`)
+        content.includes.add(`${this.rootDir}/scripts/*.js`);
+        content.includes.add(`${this.rootDir}/fonts/**/*`);
+        content.excludes.add(`${this.rootDir}/node_modules/**/*`);
+        content.excludes.add(`${this.outputDir}/**/*`);
     }
 
     get csharp() {
@@ -47,20 +92,6 @@ class paths {
 
     get javascript() {
         let javascript = _javascript.get(this);
-        if( javascript.isEmpty ) {
-            
-            javascript.includes.add(`${this.sourceDir}/**/*.js`);
-            javascript.excludes.add(`${this.rootDir}/bower_components/**/*`);
-            javascript.excludes.add(`${this.rootDir}/bin/**/*`);
-            javascript.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
-            javascript.excludes.add(`${this.rootDir}/node_modules/**/*`);
-            javascript.excludes.add(`${this.outputDir}/**/*`);
-            javascript.excludes.add(`${this.rootDir}/jspm.config.js`);
-            javascript.excludes.add(`${this.rootDir}/wallaby.js`);
-            javascript.excludes.add(`${this.rootDir}/config.js`);
-            javascript.excludes.add(`${this.rootDir}/gulpfile.js`);
-            javascript.excludes.add(`${this.rootDir}/gulp/**/*`);
-        }
         return javascript;
     }
 
@@ -72,44 +103,16 @@ class paths {
 
     get html() {
         let html = _html.get(this);
-        if( html.isEmpty ) {
-            html.includes.add(`${this.rootDir}/**/*.html`);
-            html.excludes.add(`${this.rootDir}/bin/**/*`);
-            html.excludes.add(`${this.rootDir}/bower_components/**/*`);
-            html.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
-            html.excludes.add(`${this.rootDir}/node_modules/**/*`);
-            html.excludes.add(`${this.outputDir}/**/*`);
-        }
         return html;
     }
 
     get less() {
         let less = _less.get(this);
-        if( less.isEmpty ) {
-            less.includes.add(`${this.rootDir}/styles/styles.less`);
-            less.excludes.add(`${this.rootDir}/bower_components/**/*`);
-            less.excludes.add(`${this.rootDir}/jspm_packages/**/*`);
-            less.excludes.add(`${this.rootDir}/node_modules/**/*`);
-            less.excludes.add(`${this.outputDir}/**/*`);
-        }
         return less;
     }
 
     get content() {
         let content = _content.get(this);
-        if( content.isEmpty ) {
-            content.includes.add(`${this.rootDir}/jspm_packages/**/*`);
-            content.includes.add(`${this.rootDir}/bower_components/bootstrap/dist/js/bootstrap.min.js`);
-            content.includes.add(`${this.sourceDir}/jspm.config.js`);
-            content.includes.add(`${this.rootDir}/**/*.jpg`);
-            content.includes.add(`${this.rootDir}/**/*.jpeg`);
-            content.includes.add(`${this.rootDir}/**/*.gif`);
-            content.includes.add(`${this.rootDir}/**/*.png`)
-            content.includes.add(`${this.rootDir}/scripts/*.js`);
-            content.includes.add(`${this.rootDir}/fonts/**/*`);
-            content.excludes.add(`${this.rootDir}/node_modules/**/*`);
-            content.excludes.add(`${this.outputDir}/**/*`);
-        }
         return content;
     }
 
