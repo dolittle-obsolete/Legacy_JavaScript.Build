@@ -14,5 +14,5 @@ gulp.task("dotnet", cb => {
 });
 
 gulp.task("dotnetbuild", cb => {
-    start("dotnet build", {setsid: true}, cb);
+    start("dotnet build --no-restore", {setsid: true}, cb);
 });
