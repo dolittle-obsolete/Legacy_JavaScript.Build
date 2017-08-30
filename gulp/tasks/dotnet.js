@@ -6,7 +6,7 @@ import gulp from "gulp";
 import start from "gulp-start-process";
 
 export function dotnetPipeline(stream, cb) {
-    start("dotnet watch run", {setsid: true}, cb);
+    start("dotnet watch run --no-restore", {setsid: true}, cb);
 }
 
 gulp.task("dotnet", cb => {
