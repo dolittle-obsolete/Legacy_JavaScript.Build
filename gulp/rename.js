@@ -25,7 +25,7 @@ let rename = (globConfig) => {
             if (pattern[pattern.length - 1] == path.sep) pattern = pattern.substr(0, pattern.length - 1);
 
             let resolved = path.resolve(pattern);
-            if (resolvedDirName.indexOf(resolved) == 0) {
+            if (resolved.indexOf(resolvedDirName) == 0) {
                 let pathToUse = resolved;
                 if( p.hasBasePath ) {
                     pathToUse = p.basePath;
