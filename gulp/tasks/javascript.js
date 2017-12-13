@@ -25,7 +25,7 @@ export function javaScriptPipeline(stream) {
             }
             //sourceRoot: "../"
         }))
-        .pipe(rename(config.paths.html))
+        .pipe(rename(config.paths.javascript))
         .pipe(gulpDebug())
         .pipe(gulp.dest(config.paths.outputDir));
 
